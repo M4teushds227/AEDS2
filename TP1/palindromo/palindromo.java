@@ -1,4 +1,5 @@
 class palindromo{
+	@SuppressWarnings("static-access")
 	public static void main(String[] args){
 		boolean i = true, resp;
 		MyIO my = new MyIO();

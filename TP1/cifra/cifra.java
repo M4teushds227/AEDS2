@@ -1,4 +1,5 @@
 class cifra {
+    @SuppressWarnings("static-access")
     public static void main(String[] args) {
         MyIO my = new MyIO();
         boolean i = true;
@@ -11,14 +12,14 @@ class cifra {
                 if (palavra.charAt(0) == 'F' && palavra.charAt(1) == 'I' && palavra.charAt(2) == 'M') {
                     i = false;
                 } else {
-                    String teste, teste1, resp = "";
-                    char temp, temp1;
+                    String resp = "";
+                    char temp;
                     int a;
                     for (int x = 0; x < tamanho; x++) {
                         temp = palavra.charAt(x);
                         a = temp + 3;
-                        temp1 = (char) a;
-                        resp += temp1;
+                        temp = (char) a;
+                        resp += temp;
                     }
                     my.println(resp);
                 }
