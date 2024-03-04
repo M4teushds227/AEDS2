@@ -19,7 +19,6 @@ class is {
     }
 
     static boolean verV(String f) {
-        MyIO my = new MyIO();
         boolean resp = true;
         int tamanho;
         tamanho = f.length();
@@ -35,14 +34,11 @@ class is {
     }
 
     static boolean verC(String f) {
-        MyIO my = new MyIO();
         boolean resp = true;
         int tamanho;
         tamanho = f.length();
         for (int x = 0; x < tamanho; x++) {
-            if (f.charAt(x) == 'a' || f.charAt(x) == 'e' || f.charAt(x) == 'i' || f.charAt(x) == 'o'
-                    || f.charAt(x) == 'u' || f.charAt(x) == 'A' || f.charAt(x) == 'E' || f.charAt(x) == 'I'
-                    || f.charAt(x) == 'O' || f.charAt(x) == 'U') {
+            if (!(verV(f)) && f.charAt(x) >= 'a' && f.charAt(x) <= 'z' && f.charAt(x) >= 'A' && f.charAt(x) <= 'Z') {
             } else {
                 resp = false;
             }
