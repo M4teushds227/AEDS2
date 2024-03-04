@@ -13,7 +13,17 @@ class cifra {
                     i = false;
                 } else {
                     String resp = "";
-                    char temp;
+                    resp = cesar(palavra,tamanho);
+                    my.println(resp);
+                }
+            }
+        }
+
+    }
+
+        public static String cesar(String palavra, int tamanho){
+            String resp = "";
+            char temp;
                     int a;
                     for (int x = 0; x < tamanho; x++) {
                         temp = palavra.charAt(x);
@@ -21,10 +31,6 @@ class cifra {
                         temp = (char) a;
                         resp += temp;
                     }
-                    my.println(resp);
-                }
-            }
+            return resp;
         }
-
-    }
 }
