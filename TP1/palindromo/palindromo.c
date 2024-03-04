@@ -25,25 +25,30 @@ char* lerLinha(){
     return linha;
 }
 
+bool palin(char* frase , int tamanho){
+    bool resp =true;
+    for(int x = 0; x < tamanho / 2;x++){
+        if(frase[x] != frase[tamanho - 1 - x]){
+            resp = false;
+            x = tamanho;
+        }
+    }
+    
+    return resp;
+}
+
 int main(){
     int tamanho;
     bool i = true,resp;
     while (i)
     {
         char* palavra = lerLinha();
-        resp = true;
         tamanho = strlen(palavra);
         if(tamanho > 2){
             if(palavra[0] == 'F' && palavra[1] == 'I' && palavra[2] == 'M'){
                 i = false;
             }else{    
-                for(int in = 0, vol = tamanho -1;in < tamanho/2;in ++,vol --){
-                    if(palavra[in] == palavra[vol]){}
-                    else{
-                        in = tamanho;
-                        resp = false;
-                    }
-                }
+                resp = palin(palavra,tamanho);  
                 if (resp == true){
                     printf("SIM\n");                    
                 }else{
