@@ -6,7 +6,7 @@ void abrirC();
 int main()
 {
     int numr;
-    scanf("%d", numr);
+    scanf("%d/n", &numr);
     lerE(numr);
     abrirC();
     return 0;
@@ -14,11 +14,11 @@ int main()
 
 void lerE(int total)
 {
-    FILE *arquivo = fopen("arq.txt", "r+");
+    FILE *arquivo = fopen("arq.txt", "w+");
     for (int i = 0; i < total; i++){
-        double numlido;
-        scanf("%f",numlido);
-        fwrite(&numlido, sizeof(double), 1 ,arquivo);
+        char numlido[100];
+        scanf("%[^\n]", numlido);
+        fprintf(arquivo,"%s\n",numlido);
     }
     fclose(arquivo);
 }
@@ -35,7 +35,7 @@ void abrirC(){
         if(valor == (long) valor){
             printf("%d",(int) valor);
         }else{
-            printf("%f", valor);
+            printf("%lf", valor);
         }
     }
     fclose(arquivo);
