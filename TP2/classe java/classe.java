@@ -22,9 +22,10 @@ public class classe {
         private boolean wizard;
 
         Persona(){
-            this("id","name","alt","house","ancestry","species","patronus","hog","hog2","actor","alive");
+            this("id","name",l,"house","ancestry","species","patronus","hog","hog2","actor",true,data,0,"olha","gender","corcabelo",true);
         }
-        Persona(String id,String name,Lista alt_name,String house,String ancestry,String species,String patronus,String hog_Staff,String hog_Student,String actor_name,boolean alive,Date data,int idade,String cor_Olho,String gender,String cor_cabelo,boolean wizard){
+    
+        Persona(String id,String name,classe.Lista alt_name,String house,String ancestry,String species,String patronus,String hog_Staff,String hog_Student,String actor_name,boolean alive,Date data,int idade,String cor_Olho,String gender,String cor_cabelo,boolean wizard){
                 this.id = id;
                 this.name = name;
                 this.alt_name = alt_name;
@@ -47,7 +48,13 @@ public class classe {
     }
     
     class Lista{
-
+        String[] lista;
+        Lista(){
+           this(6);
+        }
+        Lista(int x){
+            lista = new String[x];
+        }
     }
 
     static void main(String[] args) {
