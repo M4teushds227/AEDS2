@@ -20,8 +20,8 @@ class Persona {
     private String actor_name;
     private Lista alternate_actors;
     private boolean alive;
-    private Date data;
-    private int idade;
+    private String data;
+    private int ida;
     private String cor_Olho;
     private String gender;
     private String cor_cabelo;
@@ -45,7 +45,7 @@ class Persona {
         this.hog_Student = hog_Student;
         this.actor_name = actor_name;
         this.alive = alive;
-        this.idade = idade;
+        this.ida = idade;
         this.cor_Olho = cor_Olho;
         this.gender = gender;
         this.cor_cabelo = cor_cabelo;
@@ -114,13 +114,12 @@ class Persona {
         }    
     }
 
-    public void setData(String data) throws ParseException {
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        this.data = formato.parse(data);
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public void setIdade(String idade) {
-        this.idade = Integer.parseInt(idade);
+    public void setIdade(String ida) {
+        this.ida = Integer.parseInt(ida);
 
     }   
 
@@ -185,7 +184,7 @@ class Persona {
     }
 
     public  int getIdade() {
-        return idade;
+        return ida;
     }
 
     public  String getCor_Olho() {
@@ -212,8 +211,8 @@ class Persona {
         return alt_name.getN();
     }
 
-    public  Date getData() {
-        return data;
+    public  String getData() {
+        return this.data;
     }
 
     public  void mostrarUm(Persona[] p,String id){
@@ -233,29 +232,24 @@ class Persona {
     }
 
     public String mostrarAltname(){
-        String resp= "";
-        //resp = this.alt_name.verLista("");
+        String resp;
+        resp = this.alt_name.verLista();
         return resp;
     }
-    // public  void mostrar(){
-    //     int cont = 0;
-    //     String resp = "";
-    //     //{} ## Slytherin ## muggleborn ## human ##  ## false ## false ##  ## false ## 31-12-1926 ## 1925 ## dark ## female ## black ## false]
-    //     resp +="["+ getId() +" ## " + getName() + " ## {";
-    //     if(alt_name.getN() > 0){
-    //         if(alt_name.getN() > 1){
-    //             for(cont = 0;cont < getNL();cont++){
-    //                 resp += l[cont] + ", ";
-    //             }
-    //             resp += l[cont+ 1] + "}";
-    //         }else{
-    //             resp += l[cont] + "}";
-    //         }
-    //     }else{
-    //         resp += "}";
-    //     }
-    //     resp += " ## " + getHouse() + " ## " + getAncestry() + " ## " + getSpecies() + " ## " + getPatronus() + " ## " + getHog_Staff() + " ## " + getHog_Student () + " ## " + getActor_name() + " ## " + getAlive() + " ## " + getData() + " ## " + getIdade() + " ## " + getCor_Olho() + " ## " + getGender() + " ## " + getCor_cabelo() + " ## " + getWizard() + "]";
-    // }
+
+    public String mostrarAltAct(){
+        String resp;
+        resp = this.alternate_actors.verLista();
+        return resp;
+    }
+
+    public String mostrar(){
+        int cont = 0;
+        String resp = "[";
+        //   ## false ## 31-07-1980 ## 1980 ## green ## male ## black ## false]
+        resp += getId() +" ## " + getName() + " ## " + mostrarAltname() + " ## " + getHouse() + " ## " + getAncestry() + " ## " + getSpecies() + " ## " + getPatronus() + " ## " + getActor_name() + " ## " + getAlive() + " ## " + getData() ;
+        return resp;
+    }
 
 }
 
@@ -264,7 +258,7 @@ class Lista {
         private int n;
 
     Lista() {
-        this(15);
+        this(20);
     }
 
     Lista(int x) {
@@ -281,18 +275,47 @@ class Lista {
 
     public void setLista(String lista) {
         if(lista.length() > 0){
-            this.lista = lista.split(",");
-            this.n = this.lista.length;
-            System.err.println(this.n);
+            if(lista.charAt(1) != ']'){
+                String tmp = "";
+                for(int i = 0; i < lista.length();i++){
+                    if(lista.charAt(i) == '[' || lista.charAt(i) == ']' || lista.charAt(i) == 39){
+                    }else if(lista.charAt(i) == ','){
+                        tmp += lista.charAt(i);
+                        i++;
+                    }else{
+                        tmp += lista.charAt(i);
+                    }
+                }
+                this.lista = tmp.split(",");
+                this.n = this.lista.length;
+            }else{
+                this.lista = null;
+            }
         }else{
-            this.lista[0] = "{"; 
-            this.lista[1] = "}"; 
+            this.lista = null;  
         }
     }
 
-    //public String verLista(String resp) {
+    public String verLista() {
+        String tmp = "{";
+        String[] l = getLista();
+        if(getN() > 0){
+            for(int fora = 0; fora < getN(); fora ++){
+                for(int dentro = 0; dentro < l[fora].length(); dentro ++){
+                    tmp += lista[fora].charAt(dentro);
+                }
+                if((fora + 1) == getN()){
+                    tmp += "}";
+                }else{
+                    tmp += ", ";
+                }
+            }
+        }else{
+            tmp += "}";
+        }
         
-    //}
+        return tmp;
+    }
 
     
 }
@@ -303,6 +326,17 @@ public class classe {
         Persona[] p = new Persona[406];
         try {
             lerP(p);
+            boolean i = true;
+            String id;
+            while (i) {
+                id = MyIO.readLine();
+                if(id.charAt(0) == 'F' && id.charAt(1) == 'I' && id.charAt(2) == 'M'){
+                    i = false;
+                }else{
+                    MyIO.println(achar(p,id));
+                    id = MyIO.readLine();
+                }
+            }
         } catch (Exception e) {
             System.err.println("erro " + e);
         }
@@ -311,7 +345,7 @@ public class classe {
     static void lerP(Persona[] p) throws IOException, ParseException{
         String caminho = "./tmp/characters.csv";
         BufferedReader br = new BufferedReader(new FileReader(caminho));
-        String linha = "";
+        String linha = br.readLine();
         String[] splt;
         int cont = 0;
         while ((linha = br.readLine()) != null) {
@@ -329,16 +363,38 @@ public class classe {
             p[cont].setActor_name(splt[9]);
             p[cont].setAlive(splt[10]);
             p[cont].setAlternate_actors(splt[11]);
-            //p[cont].setData(splt[12]);
-            //p[cont].setIdade(splt[13]);
-            System.err.println(splt[12]);
-            System.err.println(splt[13]);
+            p[cont].setData(splt[12]);
+            p[cont].setIdade(splt[13]);
             p[cont].setCor_Olho(splt[14]);
             p[cont].setGender(splt[15]);
             p[cont].setCor_cabelo(splt[16]);
             p[cont].setWizard(splt[17]);
+            cont ++;
         }
         br.close();
+    }
+
+    public static String achar(Persona[] p, String id){
+        String resp = "";
+        for(Persona x : p){
+            if(compararID(x.getId(), id)){
+                resp = x.mostrar();
+            }else{
+                resp = "";
+            }
+        }
+        return resp;
+    }
+
+    public static Boolean compararID(String idP,String idA){
+        boolean resp = true;
+        int tam = idA.length();
+        for(int i = 0;i < tam;i++){
+            if(idA.charAt(i) != idP.charAt(i)){
+                resp = false;
+            }
+        }
+        return resp;
     }
 
 }
