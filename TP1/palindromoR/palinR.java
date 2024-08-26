@@ -2,36 +2,30 @@ public class palinR {
     @SuppressWarnings("static-access")
     public static void main(String[] args) {
         MyIO my = new MyIO();
-        String frase;
+        String frase = my.readLine();
         int tamanho;
-        boolean i = true;
-        while(i){
-            boolean resp;
-            frase = my.readLine();
+        while (!(frase.charAt(0) == 'F' && frase.charAt(1) == 'I' && frase.charAt(2) == 'M')) {
             tamanho = frase.length();
-            if(frase.charAt(0) == 'F' && frase.charAt(1) == 'I' &&frase.charAt(2) == 'M'){
-            i = false;
+            if (palin(0, frase, tamanho, true)) {
+                my.println("SIM");
             } else {
-                resp = palin(0 ,frase, tamanho , true); 
-                if(resp){
-                    my.println("SIM");
-                }else{
-                    my.println("NAO");
-                }
+                my.println("NAO");
             }
+            frase = my.readLine();  
+
         }
 
     }
-    
-    public static boolean palin(int x, String frase, int tamanho, boolean resp){
-            if(x < tamanho/2){
-                if(frase.charAt(x) == frase.charAt(tamanho - x - 1)){
-                    resp = palin( x + 1, frase, tamanho, resp);
-                }else{
-                    resp = false;
-                }
+
+    public static boolean palin(int x, String frase, int tamanho, boolean resp) {
+        if (x < tamanho / 2) {
+            if (frase.charAt(x) == frase.charAt(tamanho - x - 1)) {
+                resp = palin(x + 1, frase, tamanho, resp);
+            } else {
+                resp = false;
             }
-            return resp;
+        }
+        return resp;
     }
 
 }

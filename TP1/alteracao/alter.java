@@ -7,19 +7,11 @@ class alter {
         gerador.setSeed(4);
         MyIO my = new MyIO();
         int tamanho;
-        boolean i = true;
-        String frase, fraseC;
-        while (i) {
-            frase = my.readLine();
+        String frase = my.readLine();
+        while (!(frase.charAt(0) == 'F' && frase.charAt(1) == 'I' && frase.charAt(2) == 'M')) {
             tamanho = frase.length();
-
-            if (frase.charAt(0) == 'F' && frase.charAt(1) == 'I' && frase.charAt(2) == 'M') {
-                i = false;
-            } else {
-                fraseC = cifra(frase, tamanho , gerador);
-                my.println(fraseC);
-            }
-
+            my.println(cifra(frase, tamanho, gerador));
+            frase = my.readLine();
         }
     }
 
