@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class alge{
+public class alge {
     public static void main(String[] args) {
         String ent;
         Scanner sc = new Scanner(System.in);
@@ -11,6 +11,7 @@ public class alge{
             nuns = varI(ent);
             exp = mudarEx(ent);
             exp = expre(nuns, exp);
+
         }
     }
 
@@ -49,21 +50,46 @@ public class alge{
                 L += nuns.charAt(1);
             } else if (x.charAt(i) == 'C') {
                 L += nuns.charAt(2);
-            } else if (x.charAt(i)== 'a'){
-                i +=2;
+            } else if (x.charAt(i) == 'a') {
+                i += 2;
                 L += '^';
-            } else if (x.charAt(i) == 'n'){
-                i+=2;
-                L +='!';
-            } else if (x.charAt(i) == 'o'){
-                i ++;
-                L +='#';
-            } else if (x.charAt(i) == '('){
-                L +='(';
-            } else if (x.charAt(i) == ')'){
-                L +=')';
+            } else if (x.charAt(i) == 'n') {
+                i += 2;
+                L += '!';
+            } else if (x.charAt(i) == 'o') {
+                i++;
+                L += '#';
+            } else if (x.charAt(i) == '(') {
+                L += '(';
+            } else if (x.charAt(i) == ')') {
+                L += ')';
             }
         }
         return L;
     }
+
+    public static String resul(String x) {
+        String resp = "";
+        int aspF;
+        for (int indo = 0; indo < x.length(); indo++) {
+            if (x.charAt(indo) == ')') {
+                aspF = indo;
+                for (int voltando = indo - 1; voltando > 0; voltando --) {
+                    if(x.charAt(voltando) == '('){
+                        if(x.charAt(voltando -1) == '!'){
+                            not(indo,voltando,x);
+                        }
+                        voltando = 0;
+                    }
+                }
+                indo = x.length();
+            }
+        }
+        return resp;
+    }
+
+    public static String not(int indo,int voltando,String x){
+        
+    }
+    
 }

@@ -2,46 +2,45 @@ class is {
     @SuppressWarnings("static-access")
     public static void main(String[] args) {
         MyIO my = new MyIO();
-        boolean i = true, x1, x2, x3, x4;
+        boolean x1, x2, x3, x4;
         String frase;
         int tamanho;
-        while (i) {
-            frase = my.readLine();
+        frase = my.readLine();
+        
+        while (!(frase.charAt(0) == 'F' && frase.charAt(1) == 'I' && frase.charAt(2) == 'M')) {
             tamanho = frase.length();
-            if (frase.charAt(0) == 'F' && frase.charAt(1) == 'I' && frase.charAt(2) == 'M') {
-                i = false;
+            x1 = verV(frase, tamanho);
+            x2 = verC(frase, tamanho);
+            x3 = verNi(frase, tamanho);
+            x4 = verNr(frase, tamanho);
+
+            if (x1) {
+                my.print("SIM ");
             } else {
-                x1 = verV(frase, tamanho);
-                x2 = verC(frase, tamanho);
-                x3 = verNi(frase, tamanho);
-                x4 = verNr(frase, tamanho);
-
-                if (x1) {
-                    my.print("SIM ");
-                } else {
-                    my.print("NAO ");
-                }
-                if (x2) {
-                    my.print("SIM ");
-                } else {
-                    my.print("NAO ");
-                }
-                if (x3) {
-                    my.print("SIM ");
-                } else {
-                    my.print("NAO ");
-                }
-                if (x4) {
-                    my.println("SIM");
-                } else {
-                    my.println("NAO");
-                }
-
+                my.print("NAO ");
             }
 
+            if (x2) {
+                my.print("SIM ");
+            } else {
+                my.print("NAO ");
+            }
+
+            if (x3) {
+                my.print("SIM ");
+            } else {
+                my.print("NAO ");
+            }
+
+            if (x4) {
+                my.println("SIM");
+            } else {
+                my.println("NAO");
+            }
+            frase = my.readLine();
         }
     }
-
+    
     static boolean verV(String f, int tamanho) {
         boolean resp = true;
         for (int x = 0; x < tamanho; x++) {
@@ -92,9 +91,9 @@ class is {
                 for (int x = 0; x < tamanho; x++) {
                     resp = true;
                     if (f.charAt(x) == 44 || f.charAt(x) == 46) {
-                        if(verP == 0){
-                            verP ++;
-                        }else{
+                        if (verP == 0) {
+                            verP++;
+                        } else {
                             x = tamanho;
                             resp = false;
                         }

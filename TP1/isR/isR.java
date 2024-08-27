@@ -2,43 +2,38 @@ class isR {
     @SuppressWarnings("static-access")
     public static void main(String[] args) {
         MyIO my = new MyIO();
-        boolean i = true, x1, x2, x3, x4;
+        boolean x1, x2, x3, x4;
         String frase;
         int tamanho;
-        while (i) {
-            frase = my.readLine();
+        frase = my.readLine();
+        while (!(frase.charAt(0) == 'F' && frase.charAt(1) == 'I' && frase.charAt(2) == 'M')) {
             tamanho = frase.length();
-            if (frase.charAt(0) == 'F' && frase.charAt(1) == 'I' && frase.charAt(2) == 'M') {
-                i = false;
+            x1 = verV(frase, tamanho, true, 0);
+            x2 = verC(frase, tamanho, true, 0);
+            x3 = verNi(frase, tamanho, true, 0);
+            x4 = verNr(frase, tamanho, true, 0, 0);
+
+            if (x1) {
+                my.print("SIM ");
             } else {
-                x1 = verV(frase, tamanho, true, 0);
-                x2 = verC(frase, tamanho, true, 0);
-                x3 = verNi(frase, tamanho, true, 0);
-                x4 = verNr(frase, tamanho, true, 0, 0);
-
-                if (x1) {
-                    my.print("SIM ");
-                } else {
-                    my.print("NAO ");
-                }
-                if (x2) {
-                    my.print("SIM ");
-                } else {
-                    my.print("NAO ");
-                }
-                if (x3) {
-                    my.print("SIM ");
-                } else {
-                    my.print("NAO ");
-                }
-                if (x4) {
-                    my.println("SIM");
-                } else {
-                    my.println("NAO");
-                }
-
+                my.print("NAO ");
             }
-
+            if (x2) {
+                my.print("SIM ");
+            } else {
+                my.print("NAO ");
+            }
+            if (x3) {
+                my.print("SIM ");
+            } else {
+                my.print("NAO ");
+            }
+            if (x4) {
+                my.println("SIM");
+            } else {
+                my.println("NAO");
+            }
+            frase = my.readLine();
         }
     }
 
@@ -101,7 +96,7 @@ class isR {
             } else {
                 return resp;
             }
-        }else if( verP == 2){
+        } else if (verP == 2) {
             resp = false;
         }
         return resp;
