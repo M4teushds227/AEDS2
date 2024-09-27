@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.Scanner;
 
 class Pokemon {
@@ -84,6 +85,10 @@ class Pokemon {
         return resp;
     }
 
+    public LocalDate getCaptureDateSF(){
+        return this.captureDate;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -147,7 +152,7 @@ class Pokedex {
 
     Pokedex(int x) {
         this.pokemons = new Pokemon[x];
-        this.n = x;
+        this.n = 0;
     }
 
     public int getN() {
@@ -224,6 +229,69 @@ class Pokedex {
 
     }
 
+    public void addPokemon(int x,Pokedex pokedex){
+        if(getN() < getPokemons().length){
+            this.pokemons[getN()] = pokedex.getPokemon(x);
+            this.n ++;
+        }else{
+            System.out.println("Pokedex cheia");
+        }
+    }
+    
+    public void addPokemonAle(Pokedex pokedex){
+
+        Random gerador = new Random();
+        gerador.setSeed(4);
+        int x = gerador.nextInt(800);
+        for(int i = getN();i < this.pokemons.length; i++){
+            this.pokemons[getN()] = pokedex.getPokemon(x);
+            this.n ++;
+            x = gerador.nextInt(800);
+        }
+    }
+
+    public void selecao(){
+        for(int i = 0; i < getN(); i++){
+            int menor = i;
+            for(int j = (i + 1);j < getN();j++){
+                if(this.pokemons[menor].getName().charAt(0) == this.pokemons[j].getName().charAt(0)){
+                    for(int z = 1;z < this.pokemons[menor].getName().length() - 1 && z < this.pokemons[j].getName().length() - 1;z++){
+                        if(this.pokemons[menor].getName().charAt(z) > this.pokemons[j].getName().charAt(z)){
+                            menor = j;
+                            z = this.pokemons[menor].getName().length();
+                        }else if((this.pokemons[menor].getName().charAt(z) < this.pokemons[j].getName().charAt(z))){
+                            z = this.pokemons[menor].getName().length();
+                        }
+                    }
+                }else if(this.pokemons[menor].getName().charAt(0) > this.pokemons[j].getName().charAt(0)){
+                    menor = j;
+                }
+            }
+            swap(menor, i);
+            System.out.println("ID = " + this.pokemons[i].getId() + " " + this.pokemons[i].getName());
+        }
+
+    }
+    
+    public void insercao(){
+        for(int i = 1 ; i < getN(); i++){
+            Pokemon tmp = this.pokemons[i];
+            int j = i - 1;
+            while (j >= 0 && this.pokemons[j].getCaptureDateSF().isBefore(this.pokemons[i].getCaptureDateSF())) {
+                this.pokemons[j + 1] = this.pokemons[j];
+                j--;
+            }
+            this.pokemons[j+1] = tmp;
+            System.out.println(this.pokemons[j+1].getCaptureDate());
+        }
+    }
+
+    public void swap(int i, int j) {
+		Pokemon temp = this.pokemons[i];
+		this.pokemons[i] = this.pokemons[j];
+		this.pokemons[j] = temp;
+	}
+
 }
 
 class ListaP {
@@ -247,7 +315,7 @@ class ListaP {
                 tmp += x.charAt(i);
             }
         }
-        
+
         tmpS = tmp.split(", ");
         this.val = tmpS;
         setN(tmpS.length);        
@@ -297,15 +365,19 @@ class ListaP {
 public class Poke {
     public static void main(String[] args) {
         try {
-            System.err.println("entrei");
-            Pokedex p = new Pokedex(800);
-            p.lerP();
+            Pokedex pokedex = new Pokedex(800),myPokedex = new Pokedex(80);
+            pokedex.lerP();
             Scanner sc = new Scanner(System.in);
             String entrada = sc.nextLine();
             while (!(entrada.charAt(0) == 'F' && entrada.charAt(1) == 'I' && entrada.charAt(2) == 'M')) {
-                p.impri(Integer.parseInt(entrada) - 1);
+                //pokedex.impri(Integer.parseInt(entrada) - 1);
+                //myPokedex.addPokemon(Integer.parseInt(entrada) - 1,pokedex);
+                myPokedex.addPokemonAle(pokedex);
                 entrada = sc.nextLine();
             }
+            //myPokedex.selecao();
+            myPokedex.insercao();
+            
             sc.close();
         } catch (Exception e) {
             System.err.println(e);
