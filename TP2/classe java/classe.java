@@ -2,9 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 class Persona {
 
@@ -57,7 +54,7 @@ class Persona {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -65,7 +62,7 @@ class Persona {
     public void setAlt_name(String alt_name) {
         this.alt_name.setLista(alt_name);
     }
-    
+
     public void setHouse(String house) {
         this.house = house;
     }
@@ -83,18 +80,18 @@ class Persona {
     }
 
     public void setHog_Staff(String hog_Staff) {
-        if(hog_Staff.charAt(0) == 'F'){
+        if (hog_Staff.charAt(0) == 'F') {
             this.hog_Staff = "false";
-        }else{
-            this.hog_Staff = "true";
+        } else {
+            this.hog_Staff = "false";
         }
     }
-    
+
     public void setHog_Student(String hog_Student) {
-        if(hog_Student.charAt(0) == 'F'){
+        if (hog_Student.charAt(0) == 'F') {
             this.hog_Student = "false";
-        }else{
-            this.hog_Student = "true";
+        } else {
+            this.hog_Student = "false";
         }
     }
 
@@ -107,11 +104,11 @@ class Persona {
     }
 
     public void setAlive(String alive) {
-        if(alive.charAt(0) == 'F'){
+        if (alive.charAt(0) == 'F') {
             this.alive = false;
-        }else{
-            this.alive = true;
-        }    
+        } else {
+            this.alive = false;
+        }
     }
 
     public void setData(String data) {
@@ -121,7 +118,7 @@ class Persona {
     public void setIdade(String ida) {
         this.ida = Integer.parseInt(ida);
 
-    }   
+    }
 
     public void setCor_Olho(String cor_Olho) {
         this.cor_Olho = cor_Olho;
@@ -136,126 +133,203 @@ class Persona {
     }
 
     public void setWizard(String wizard) {
-        if(wizard.charAt(0) == 'F'){
+        if (wizard.charAt(0) == 'F') {
             this.wizard = false;
-        }else{
-            this.wizard = true;
+        } else {
+            this.wizard = false;
         }
     }
 
-    public  String getId() {
+    public String getId() {
         return id;
     }
 
-    public  String getName() {
-        return name;
+    public String getName() {
+        String resp = "";
+        if (this.name == "") {
+            resp = "false";
+        } else {
+            resp = this.name;
+        }
+        return resp;
     }
 
-    public  String getHouse() {
-        return house;
+    public String getHouse() {
+        String resp = "";
+        if (this.house == "") {
+            resp = "false";
+        } else {
+            resp = this.house;
+        }
+        return resp;
     }
 
-    public  String getAncestry() {
-        return ancestry;
+    public String getAncestry() {
+        String resp = "";
+        if (this.ancestry == "") {
+            resp = "false";
+        } else {
+            resp = this.ancestry;
+        }
+        return resp;
     }
 
-    public  String getSpecies() {
-        return species;
+    public String getSpecies() {
+        String resp = "";
+        if (this.species == "") {
+            resp = "false";
+        } else {
+            resp = this.species;
+        }
+        return resp;
     }
 
-    public  String getPatronus() {
-        return patronus;
+    public String getPatronus() {
+        String resp = "";
+        //if (this.patronus == "") {
+        //    resp = "false";
+        //} else {
+            resp = this.patronus;
+        //}
+        return resp;
     }
 
-    public  String getHog_Staff() {
-        return hog_Staff;
+    public String getHog_Staff() {
+        String resp = "";
+        if (this.hog_Staff == "") {
+            resp = "false";
+        } else {
+            resp = this.hog_Staff;
+        }
+        return resp;
     }
 
-    public  String getHog_Student() {
-        return hog_Student;
+    public String getHog_Student() {
+        String resp = "";
+        if (this.hog_Student == "") {
+            resp = "false";
+        } else {
+            resp = this.hog_Student;
+        }
+        return resp;
     }
 
-    public  String getActor_name() {
-        return actor_name;
+    public String getActor_name() {
+        String resp = "";
+        //if (this.actor_name == "") {
+        //     resp = "false";
+        // } else {
+            resp = this.actor_name;
+        // }
+        return resp;
     }
 
-    public  boolean getAlive() {
+    public boolean getAlive() {
         return alive;
     }
 
-    public  int getIdade() {
+    public int getIdade() {
         return ida;
     }
 
-    public  String getCor_Olho() {
-        return cor_Olho;
+    public String getCor_Olho() {
+        String resp = "";
+        if(this.cor_Olho == ""){
+            resp = "false";
+        }else{
+            resp = this.cor_Olho;
+        }
+        return resp;
     }
 
-    public  String getGender() {
-        return gender;
+    public String getGender() {
+        String resp = "";
+        if(this.gender == ""){
+            resp = "false";
+        }else{
+            resp = this.gender;
+        }
+        return resp;
     }
 
-    public  String getCor_cabelo() {
-        return cor_cabelo;
+    public String getCor_cabelo() {
+        String resp = "";
+        if(this.cor_cabelo == ""){
+            resp = "false";
+        }else{
+            resp = this.cor_cabelo;
+        }
+        return resp;
     }
 
-    public  boolean getWizard() {
+    public boolean getWizard() {
         return wizard;
     }
 
-    public  String[] getAlt_name() {
+    public String[] getAlt_name() {
         return alt_name.getLista();
     }
 
-    public int getNL(){
+    public int getNL() {
         return alt_name.getN();
     }
 
-    public  String getData() {
+    public String getData() {
         return this.data;
     }
 
-    public  void mostrarUm(Persona[] p,String id){
-        for(Persona x : p){
-            if(x.getId() == id){
+    public void mostrarUm(Persona[] p, String id) {
+        for (Persona x : p) {
+            if (x.getId() == id) {
                 System.out.println("Id : " + getId());
                 System.out.println("Name : " + getName());
                 System.out.println("Alternate_names : " + mostrarAltname());
-                //name;alternate_names;house;ancestry;species;patronus;hogwartsStaff;hogwartsStudent;actorName;alive;alternate_actors;dateOfBirth;yearOfBirth;eyeColour;gender;hairColour;wizard
-
-
+                System.out.println("House : " + getHouse());
+                System.out.println("Ancestry : " + getAncestry());
+                System.out.println("Species : " + getSpecies());
+                System.out.println("Patronus : " + getPatronus());
+                System.out.println("Hogwarts Staff : " + getHog_Staff());
+                System.out.println("Hogwarts Student : " + getHog_Student());
+                System.out.println("Actor name : " + getActor_name());
+                System.out.println("Alive : " + getAlive());
+                System.out.println("Alternate actors : " + getActor_name());
+                System.out.println("Date of Birth : " + getData());
+                System.out.println("Year of Birth : " + getIdade());
+                System.out.println("Eye Colour : " + getCor_Olho());
+                System.out.println("Gender : " + getGender());
+                System.out.println("Hair Colour : " + getCor_cabelo());
+                System.out.println("Wizard : " + getWizard());
                 break;
             }
         }
-        
-
     }
 
-    public String mostrarAltname(){
+    public String mostrarAltname() {
         String resp;
         resp = this.alt_name.verLista();
         return resp;
     }
 
-    public String mostrarAltAct(){
+    public String mostrarAltAct() {
         String resp;
         resp = this.alternate_actors.verLista();
         return resp;
     }
 
-    public String mostrar(){
-        int cont = 0;
+    public String mostrar() {
         String resp = "[";
-        //   ## false ## 31-07-1980 ## 1980 ## green ## male ## black ## false]
-        resp += getId() +" ## " + getName() + " ## " + mostrarAltname() + " ## " + getHouse() + " ## " + getAncestry() + " ## " + getSpecies() + " ## " + getPatronus() + " ## " + getActor_name() + " ## " + getAlive() + " ## " + getData() ;
+        resp += getId() + " ## " + getName() + " ## " + mostrarAltname() + " ## " + getHouse() + " ## " + getAncestry()
+                + " ## " + getSpecies() + " ## " + getPatronus() + " ## " + getHog_Staff() + " ## " + getHog_Student() + " ## " + getActor_name() + " ## " + getAlive()
+                + " ## " + getData() + " ## " + getIdade() + " ## " + getCor_Olho() + " ## " + getGender() + " ## "
+                + getCor_cabelo() + " ## " + getWizard() + "]";
         return resp;
     }
 
 }
 
 class Lista {
-        private String[] lista;
-        private int n;
+    private String[] lista;
+    private int n;
 
     Lista() {
         this(20);
@@ -274,67 +348,64 @@ class Lista {
     }
 
     public void setLista(String lista) {
-        if(lista.length() > 0){
-            if(lista.charAt(1) != ']'){
+        if (lista.length() > 0) {
+            if (lista.charAt(1) != ']') {
                 String tmp = "";
-                for(int i = 0; i < lista.length();i++){
-                    if(lista.charAt(i) == '[' || lista.charAt(i) == ']' || lista.charAt(i) == 39){
-                    }else if(lista.charAt(i) == ','){
+                for (int i = 0; i < lista.length(); i++) {
+                    if (lista.charAt(i) == '[' || lista.charAt(i) == ']' || lista.charAt(i) == 39) {
+                    } else if (lista.charAt(i) == ',') {
                         tmp += lista.charAt(i);
                         i++;
-                    }else{
+                    } else {
                         tmp += lista.charAt(i);
                     }
                 }
                 this.lista = tmp.split(",");
                 this.n = this.lista.length;
-            }else{
+            } else {
                 this.lista = null;
             }
-        }else{
-            this.lista = null;  
+        } else {
+            this.lista = null;
         }
     }
 
     public String verLista() {
         String tmp = "{";
         String[] l = getLista();
-        if(getN() > 0){
-            for(int fora = 0; fora < getN(); fora ++){
-                for(int dentro = 0; dentro < l[fora].length(); dentro ++){
+        if (getN() > 0) {
+            for (int fora = 0; fora < getN(); fora++) {
+                for (int dentro = 0; dentro < l[fora].length(); dentro++) {
                     tmp += lista[fora].charAt(dentro);
                 }
-                if((fora + 1) == getN()){
+                if ((fora + 1) == getN()) {
                     tmp += "}";
-                }else{
+                } else {
                     tmp += ", ";
                 }
             }
-        }else{
+        } else {
             tmp += "}";
         }
-        
         return tmp;
     }
-
-    
 }
 
 public class classe {
-
     public static void main(String[] args) {
-        Persona[] p = new Persona[406];
+        Persona[] p = new Persona[405];
         try {
             lerP(p);
             boolean i = true;
             String id;
+            int cont = 0;
             while (i) {
+                cont ++;
                 id = MyIO.readLine();
-                if(id.charAt(0) == 'F' && id.charAt(1) == 'I' && id.charAt(2) == 'M'){
+                if ((id.charAt(0) == 'F' && id.charAt(1) == 'I' && id.charAt(2) == 'M') || cont >= 27) {
                     i = false;
-                }else{
-                    MyIO.println(achar(p,id));
-                    id = MyIO.readLine();
+                } else {
+                    MyIO.println(achar(p, id));
                 }
             }
         } catch (Exception e) {
@@ -342,7 +413,7 @@ public class classe {
         }
     }
 
-    static void lerP(Persona[] p) throws IOException, ParseException{
+    static void lerP(Persona[] p) throws IOException, ParseException {
         String caminho = "./tmp/characters.csv";
         BufferedReader br = new BufferedReader(new FileReader(caminho));
         String linha = br.readLine();
@@ -369,32 +440,32 @@ public class classe {
             p[cont].setGender(splt[15]);
             p[cont].setCor_cabelo(splt[16]);
             p[cont].setWizard(splt[17]);
-            cont ++;
+            cont++;
         }
         br.close();
     }
 
-    public static String achar(Persona[] p, String id){
+    public static String achar(Persona[] p, String id) {
         String resp = "";
-        for(Persona x : p){
-            if(compararID(x.getId(), id)){
+        for (Persona x : p) {
+            if (compararID(x.getId(), id)) {
                 resp = x.mostrar();
-            }else{
+                break;
+            } else {
                 resp = "";
             }
         }
         return resp;
     }
 
-    public static Boolean compararID(String idP,String idA){
+    public static Boolean compararID(String idP, String idA) {
         boolean resp = true;
         int tam = idA.length();
-        for(int i = 0;i < tam;i++){
-            if(idA.charAt(i) != idP.charAt(i)){
+        for (int i = 0; i < tam; i++) {
+            if (idA.charAt(i) != idP.charAt(i)) {
                 resp = false;
             }
         }
         return resp;
     }
-
 }

@@ -30,8 +30,8 @@ int main()
 
 void *alter(char c[], int i, char orig, char troca)
 {
-
-    if (i == strlen(c))
+    int tamanho = strlen(c);
+    if (i == tamanho)
     {
         printf("\n");
     }

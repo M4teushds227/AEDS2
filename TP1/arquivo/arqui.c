@@ -29,12 +29,11 @@ void abrirC(int total)
 {
 
     FILE *arquivo = fopen("arq.txt", "r");
-    for (int i = total; i <= 0; i--)
+    for (int i = total; i >= 0; i--)
     {
     fseek(arquivo, i, SEEK_SET);
         float valor;
         fscanf(arquivo, "%f", &valor);
-        printf("%f\n", valor);
         if (valor == (long)valor)
         {
             printf("%f\n", (int)valor);
