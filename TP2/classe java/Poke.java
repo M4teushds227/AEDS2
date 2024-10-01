@@ -180,7 +180,7 @@ class Pokedex {
     }
 
     public void lerP() throws IOException, ParseException {
-        String caminho = "./tmp/pokemon.csv";
+        String caminho = "/tmp/pokemon.csv";
         Pokedex p = new Pokedex(801);
         BufferedReader br = new BufferedReader(new FileReader(caminho));
         String entrada = br.readLine();
@@ -218,7 +218,11 @@ class Pokedex {
             }
 
             p.pokemons[cont].setCaptureRate(Integer.parseInt(split3[3]));
-            p.pokemons[cont].setLegendary(Boolean.parseBoolean(split3[4]));
+            if(split3[4].charAt(0) == '1'){
+                p.pokemons[cont].setLegendary(true);
+            }else{
+                p.pokemons[cont].setLegendary(false);
+            }
             p.pokemons[cont].setCaptureDate(split3[5]);
             cont++;
         }
@@ -262,21 +266,21 @@ class Pokedex {
             int menor = i;
             for (int j = (i + 1); j < getN(); j++) {
                 if (this.pokemons[menor].getName().charAt(0) == this.pokemons[j].getName().charAt(0)) {
-                    comp ++;
+                    comp++;
                     for (int z = 1; z < this.pokemons[menor].getName().length() - 1
                             && z < this.pokemons[j].getName().length() - 1; z++) {
-                                comp += 2;
+                        comp += 2;
                         if (this.pokemons[menor].getName().charAt(z) > this.pokemons[j].getName().charAt(z)) {
                             comp++;
                             menor = j;
                             z = this.pokemons[menor].getName().length();
                         } else if ((this.pokemons[menor].getName().charAt(z) < this.pokemons[j].getName().charAt(z))) {
-                            comp ++;
+                            comp++;
                             z = this.pokemons[menor].getName().length();
                         }
                     }
                 } else if (this.pokemons[menor].getName().charAt(0) > this.pokemons[j].getName().charAt(0)) {
-                    comp ++;
+                    comp++;
                     menor = j;
                 }
             }
@@ -291,25 +295,26 @@ class Pokedex {
         for (int i = 1; i < getN(); i++) {
             Pokemon tmp = this.pokemons[i];
             int j = i - 1;
-            while (j >= 0 && (this.pokemons[j].getCaptureDateSF().isEqual(tmp.getCaptureDateSF()) || this.pokemons[j].getCaptureDateSF().isBefore(tmp.getCaptureDateSF()))) {
+            while (j >= 0 && (this.pokemons[j].getCaptureDateSF().isEqual(tmp.getCaptureDateSF())
+                    || this.pokemons[j].getCaptureDateSF().isBefore(tmp.getCaptureDateSF()))) {
                 this.comp += 2;
                 if (this.pokemons[j].getCaptureDateSF().isBefore(tmp.getCaptureDateSF())) {
-                    this.comp ++;
+                    this.comp++;
                     this.pokemons[j + 1] = this.pokemons[j];
-                    this.mov ++;
+                    this.mov++;
                     j--;
                 } else if (this.pokemons[j].getCaptureDateSF().isEqual(tmp.getCaptureDateSF())) {
-                    this.comp ++;
+                    this.comp++;
                     for (int x = 0; x < this.pokemons[j].getName().length() - 1
                             && x < tmp.getName().length() - 1; x++) {
-                                this.comp += 2;
+                        this.comp += 2;
                         if (this.pokemons[j].getName().charAt(x) < tmp.getName().charAt(x)) {
                             this.comp += 2;
                             this.pokemons[j + 1] = this.pokemons[j];
-                            this.mov ++;
+                            this.mov++;
                             j--;
                             x = tmp.getName().length();
-                        }else{
+                        } else {
                             x = tmp.getName().length();
                             j--;
                         }
@@ -317,7 +322,7 @@ class Pokedex {
                 }
             }
             this.pokemons[j + 1] = tmp;
-            this.mov ++;
+            this.mov++;
         }
         for (int i = 0; i < getN(); i++) {
             System.err.println(this.pokemons[i].getName() + " " + this.pokemons[i].getCaptureDate());
@@ -405,18 +410,18 @@ class ListaP {
 public class Poke {
     public static void main(String[] args) {
         try {
-            Pokedex pokedex = new Pokedex(800), myPokedex = new Pokedex(40);
+            Pokedex pokedex = new Pokedex(800), myPokedex = new Pokedex(500);
             pokedex.lerP();
             Scanner sc = new Scanner(System.in);
-            //String entrada = sc.nextLine();
-            //while (!(entrada.charAt(0) == 'F' && entrada.charAt(1) == 'I' && entrada.charAt(2) == 'M')) {
-                // pokedex.impri(Integer.parseInt(entrada) - 1);
-                // myPokedex.addPokemon(Integer.parseInt(entrada) - 1,pokedex);
-                // entrada = sc.nextLine();
-            //}
-            myPokedex.addPokemonAle(pokedex);
-            //myPokedex.selecao();
-            myPokedex.insercao();
+            String entrada = sc.nextLine();
+            while (!(entrada.charAt(0) == 'F' && entrada.charAt(1) == 'I' && entrada.charAt(2) == 'M')) {
+                pokedex.impri(Integer.parseInt(entrada) - 1);
+                myPokedex.addPokemon(Integer.parseInt(entrada) - 1, pokedex);
+                entrada = sc.nextLine();
+            }
+            // myPokedex.addPokemonAle(pokedex);
+            // myPokedex.selecao();
+            // myPokedex.insercao();
 
             sc.close();
         } catch (Exception e) {
